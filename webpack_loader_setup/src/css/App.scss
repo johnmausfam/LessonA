@@ -1,0 +1,26 @@
+$bigFontSize : 24px;
+$smallFontSize : 24px;
+@mixin fineLineHeight($fontSize) {
+    font-size: $fontSize;
+    line-height: $fontSize * 1.6;
+}
+  
+
+
+.text{
+    font-weight: bolder;
+}
+
+.a{
+    background: #ededed;
+
+    .text{
+        @include fineLineHeight($bigFontSize);
+        color:#369;
+    }
+}
+
+.b.text{
+    @include fineLineHeight($smallFontSize);
+    
+}
