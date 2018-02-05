@@ -4,7 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "node devserver"
+    "dev": "node devserver",
+    "build": "webpack --config webpack.production.config.js"
   },
   "keywords": [],
   "author": "",

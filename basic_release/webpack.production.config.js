@@ -4,20 +4,26 @@ const webpack = require('webpack');
 module.exports = {
     entry: {
         bundle: [
-            'react-hot-loader/patch',
-            'webpack-dev-server/client?http://localhost:3000/', /*包進去就不用在index.html中引用 */
-            'webpack/hot/dev-server', /* HOT熱更新模組 */
             path.resolve(__dirname, 'src/index.jsx')
         ]
     },
     output: {
+        path:path.resolve(__dirname, './dist/'),
         filename: '[name].js',
-        publicPath: '/' /*build好的entry的JS會在這邊,因為react-hot-loader限制必須為"/" */
+        publicPath: '/'
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(), /*HOT熱更新模組插件*/
         new webpack.NamedModulesPlugin(), /* 更新時可以看到更新的檔案名稱*/
-        new webpack.SourceMapDevToolPlugin() /*可以在F12看到原始碼*/
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': "'production'"
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: false,
+            compress: {
+                warnings: false,
+                drop_console: false
+            }
+        })
     ],
     module: {
         rules: [
@@ -40,7 +46,7 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             url:false,
-                            sourceMap: true
+                            sourceMap: false
                         }
                     }
                 ]
@@ -65,6 +71,6 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [".js", ".json", ".jsx"] /*import可不加附檔名*/
+        extensions: [".js", ".json", ".jsx"]
     }
 };
