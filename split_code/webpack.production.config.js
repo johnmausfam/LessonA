@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     entry: {
         bundle: [
@@ -22,6 +22,9 @@ module.exports = {
                 warnings: false,
                 drop_console: false
             }
+        }),
+        new ExtractTextPlugin({
+            filename: "css/[name].css"
         })
     ],
     module: {
@@ -39,29 +42,34 @@ module.exports = {
                 ]
             },
             {
-                test: /\.css$/, loader: [
-                    "style-loader",
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: false,
-                            minimize: true
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: false
+                            }
                         }
-                    }
-                ]
+                    ]
+                })
             },
             {
-                test: /\.(sass|scss)$/, loader: [
-                    "style-loader",
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: false,
-                            minimize: true
-                        }
-                    },
-                    "sass-loader"
-                ]
+                test: /\.(sass|scss)$/,
+                use: ExtractTextPlugin.extract({
+                    /*publicPath:"../",*/
+                    fallback: "style-loader",
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: false
+                            }
+                        },
+                        "sass-loader"
+                    ]
+                })
             },
             {
                 test: /\.json$/,

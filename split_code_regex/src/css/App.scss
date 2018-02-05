@@ -27,6 +27,11 @@ html,body{
     bottom: 0px;
     height: $footerHeight;
     background-color: #369;
+    background-image: url("../images/icon.small.png");
+    background-position: center left;
+    background-repeat:no-repeat;
+    background-size: 100px;  
+    background-color: #eee;
 }
 
 .content{

@@ -11,6 +11,7 @@ const App = ()=>(
         <img src={reactLogo} />
         <div className="reactlogo"></div>
         <div className="reactlogo2"></div>
+        <div className="reactlogo3"></div>
         <hr />
         <div className="a">
             <div className="text">123</div>

@@ -59,7 +59,6 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [".js", ".json", ".jsx"], /*import可不加附檔名*/
-        alias: { images: path.resolve(__dirname, 'src/images/') }
+        extensions: [".js", ".json", ".jsx"] /*import可不加附檔名*/
     }
 };

@@ -11,3 +11,10 @@
     display: inline-block;
     background:url("images/react.png");
 }
+
+.reactlogo3{
+    width: 254px;
+    height: 198px;
+    display: inline-block;
+    background:url("/assets/redux.png");
+}
