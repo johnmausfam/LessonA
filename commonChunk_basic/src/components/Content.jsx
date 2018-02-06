@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { Button, List, Tabs, TabPane, Table } from 'antd';
 import 'antd/dist/antd.css';
 import { Gmaps, Marker, InfoWindow, Circle } from 'react-gmaps';
-import PlacesData from "../data/data.json"
-const Places = JSON.parse(PlacesData);
+import Places from "../data/data.json"
 
 const columns = [
     {

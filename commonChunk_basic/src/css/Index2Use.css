@@ -1,0 +1,11 @@
+.i2u{
+    position: fixed;
+    width:300px;
+    height: 100px;
+    font-size: 24px;
+    background-color: blue;
+    color: #fff;
+    top: 0px;
+    right: 0px;
+    z-index: 1000;
+}

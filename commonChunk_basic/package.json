@@ -5,7 +5,11 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "node devserver",
-    "build": "webpack --config webpack.production.config.js"
+    "build": "webpack -p --config webpack.production.config.js",
+    "build1": "webpack -p --config webpack.production.test1.config.js",
+    "build2": "webpack -p --config webpack.production.test2.config.js",
+    "build3": "webpack -p --config webpack.production.test3.config.js",
+    "build4": "webpack -p --config webpack.production.test4.config.js"
   },
   "keywords": [],
   "author": "",

@@ -8,6 +8,12 @@ module.exports = {
             'webpack-dev-server/client?http://localhost:3000/', /*包進去就不用在index.html中引用 */
             'webpack/hot/dev-server', /* HOT熱更新模組 */
             path.resolve(__dirname, 'src/index.jsx')
+        ],
+        bundle2: [
+            'react-hot-loader/patch',
+            'webpack-dev-server/client?http://localhost:3000/', /*包進去就不用在index.html中引用 */
+            'webpack/hot/dev-server', /* HOT熱更新模組 */
+            path.resolve(__dirname, 'src/index2.jsx')
         ]
     },
     output: {
