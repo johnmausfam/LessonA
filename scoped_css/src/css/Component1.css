@@ -1,0 +1,2 @@
+:global .colorWord { background: black }
+:local .colorWord { background: red; }
