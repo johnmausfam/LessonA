@@ -6,10 +6,8 @@
   "scripts": {
     "dev": "node devserver",
     "build": "webpack -p --config webpack.production.config.js",
-    "build1": "webpack -p --config webpack.production.test1.config.js",
     "build2": "webpack -p --config webpack.production.test2.config.js",
-    "build3": "webpack -p --config webpack.production.test3.config.js",
-    "build4": "webpack -p --config webpack.production.test4.config.js"
+    "build3": "webpack -p --config webpack.production.test3.config.js"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +27,7 @@
     "resolve-url-loader": "^2.2.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.1",
+    "uglifyjs-webpack-plugin": "^1.2.3",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1"

@@ -1,32 +1,27 @@
 const path = require('path');
 const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     entry: {
         bundle: [
+            'react-hot-loader/patch',
+            'webpack-dev-server/client?http://localhost:3000/', /*包進去就不用在index.html中引用 */
+            'webpack/hot/dev-server', /* HOT熱更新模組 */
             path.resolve(__dirname, 'src/index.jsx')
         ]
     },
     output: {
-        path:path.resolve(__dirname, './dist/'),
-        filename: '[name].js'
+        filename: '[name].js',
+        publicPath: '/' /*build好的entry的JS會在這邊,因為react-hot-loader限制必須為"/" */
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': "'production'"
+            '$ENV_TITLE':'"Dev Title"',
+            '$ENV_Server':'"http://192.168.0.1:'+(!process.env.apiport ? "3001" : ""+(process.env.apiport) )+'/Api/"'
         }),
-        new UglifyJsPlugin({
-            parallel:true,
-            cache:true,
-            sourceMap: false,
-            uglifyOptions:{
-                compress:{
-                    warnings: true,
-                    drop_console: true
-                }
-            }
-        })
+        new webpack.HotModuleReplacementPlugin(), /*HOT熱更新模組插件*/
+        new webpack.NamedModulesPlugin(), /* 更新時可以看到更新的檔案名稱*/
+        new webpack.SourceMapDevToolPlugin() /*可以在F12看到原始碼*/
     ],
     module: {
         rules: [
@@ -48,8 +43,7 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            sourceMap: false,
-                            minimize: true
+                            sourceMap: true
                         }
                     }
                 ]
@@ -60,9 +54,7 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            sourceMap: false,
-                            minimize: true,
-                            importLoaders: 1
+                            sourceMap: true
                         }
                     },
                     "sass-loader"
@@ -75,6 +67,6 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [".js", ".json", ".jsx"]
+        extensions: [".js", ".json", ".jsx"] /*import可不加附檔名*/
     }
 };

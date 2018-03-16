@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
 module.exports = {
     entry: {
         bundle: [
@@ -12,15 +14,18 @@ module.exports = {
         filename: '[name].js'
     },
     plugins: [
-        new webpack.NamedModulesPlugin(), /* 更新時可以看到更新的檔案名稱*/
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': "'production'"
         }),
-        new webpack.optimize.UglifyJsPlugin({
+        new UglifyJsPlugin({
+            parallel:true,
+            cache:true,
             sourceMap: false,
-            compress: {
-                warnings: false,
-                drop_console: false
+            uglifyOptions:{
+                compress:{
+                    warnings: true,
+                    drop_console: true
+                }
             }
         }),
         new ExtractTextPlugin({
@@ -36,7 +41,7 @@ module.exports = {
                     {
                         loader: 'url-loader',
                         options: {
-                            outputPath:"images/",
+                            //outputPath:"images/",
                             limit: 8139
                         }
                     }
@@ -50,7 +55,8 @@ module.exports = {
                         {
                             loader: 'css-loader',
                             options: {
-                                sourceMap: false
+                                sourceMap: false,
+                                minimize: true
                             }
                         }
                     ]
@@ -59,13 +65,15 @@ module.exports = {
             {
                 test: /\.(sass|scss)$/,
                 use: ExtractTextPlugin.extract({
-                    /*publicPath:"../",*/
+                    //publicPath:"../",
                     fallback: "style-loader",
                     use: [
                         {
                             loader: 'css-loader',
                             options: {
-                                sourceMap: false
+                                sourceMap: false,
+                                minimize: true,
+                                importLoaders: 1
                             }
                         },
                         "sass-loader"

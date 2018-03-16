@@ -1,7 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 module.exports = {
     entry: {
         bundle: [
@@ -10,25 +11,36 @@ module.exports = {
     },
     output: {
         path:path.resolve(__dirname, './dist/'),
-        filename: '[name].js'
+        filename: '[name].[chunkhash].js'
     },
     plugins: [
-        new UglifyJsPlugin({
-            parallel:true,
-            cache:true,
+        new webpack.NamedModulesPlugin(), /* 更新時可以看到更新的檔案名稱*/
+        new webpack.DefinePlugin({
+            '$ENV_TITLE':'"Production Title"',
+            '$ENV_Server':'"http://www.moneydj.com.tw/Api/"'
+        }),
+        new webpack.optimize.UglifyJsPlugin({
             sourceMap: false,
-            uglifyOptions:{
-                compress:{
-                    warnings: true,
-                    drop_console: true
-                }
+            compress: {
+                warnings: false,
+                drop_console: false
             }
         }),
         new ExtractTextPlugin({
-            filename: "css/[name].css"
+            filename: "css/[name].[hash].css"
         }),
         new webpack.DllReferencePlugin({
             manifest: require('./vendor-manifest.json')
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Sport Place!',
+            filename: 'index.html',
+            template: './htmltmpl/index.html',
+            chunks: ['bundle']
+        }),
+        new HtmlWebpackIncludeAssetsPlugin({
+            assets: [{ path: './', glob: 'vendor.dll.*.js' }],
+            append: false
         })
     ],
     module: {
@@ -40,6 +52,7 @@ module.exports = {
                     {
                         loader: 'url-loader',
                         options: {
+                            name:'[name][hash].[ext]',
                             outputPath:"images/",
                             limit: 8139
                         }

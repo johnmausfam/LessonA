@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "node devserver",
-    "build_dll": "webpack --config webpack.dll.production.config.js",
-    "build_proj": "webpack --config webpack.production.config.js",
+    "build_dll": "webpack -p --config webpack.dll.production.config.js",
+    "build_proj": "webpack -p --config webpack.production.config.js",
     "build": "npm run build_dll && npm run build_proj"
   },
   "keywords": [],
@@ -26,6 +26,7 @@
     "resolve-url-loader": "^2.2.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.1",
+    "uglifyjs-webpack-plugin": "^1.2.3",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1"
