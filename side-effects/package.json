@@ -1,0 +1,23 @@
+{
+  "name": "webpack_setup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "node devserver",
+    "build": "webpack --config webpack.production.config.js",
+    "buildp": "webpack -p --config webpack.p.production.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "webpack": "^4.0.0-beta.3",
+    "webpack-cli": "^2.0.10"
+  }
+}
