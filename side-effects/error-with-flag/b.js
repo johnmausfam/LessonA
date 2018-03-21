@@ -1,0 +1,1 @@
+export const b = (function(){ console.log("set b");return Date.now() % 999 == 0 ? "B1" : "B2" })()
